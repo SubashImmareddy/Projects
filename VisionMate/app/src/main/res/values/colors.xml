@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="vm_gold">#FFD700</color>
+    <color name="vm_dark_panel">#1A1A1A</color>
+    <color name="vm_green">#00FF88</color>
+    <color name="vm_grey_text">#AAAAAA</color>
+    <color name="vm_red">#FF4444</color>
+</resources>

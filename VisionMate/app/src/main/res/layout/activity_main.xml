@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212">
+
+    <!-- Camera — takes 60%, settings floats on top of it -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="65">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!-- Settings icon floating top right ON camera -->
+        <TextView
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="12dp"
+            android:text="⚙"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:background="#99000000"
+            android:padding="8dp"/>
+
+        <!-- Scan guide box centered -->
+        <View
+            android:id="@+id/scanBox"
+            android:layout_width="260dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:background="@drawable/scan_guide_box"/>
+
+        <!-- Hint text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="48dp"
+            android:text="Align label inside the box"
+            android:textColor="#CCFFFFFF"
+            android:textSize="11sp"
+            android:background="#99000000"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"/>
+
+        <!-- Bottom control strip overlaid on camera -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:background="#EE121212"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvScanStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Point camera at product label"
+                android:textColor="#BB86FC"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:layout_marginBottom="6dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:id="@+id/btnTorchWrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_grey"
+                    android:gravity="center"
+                    android:layout_marginEnd="6dp">
+                    <Button
+                        android:id="@+id/btnTorch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="🔦"
+                        android:textSize="17sp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/scan1Wrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/btn_gold"
+                    android:gravity="center"
+                    android:layout_marginEnd="6dp">
+                    <Button
+                        android:id="@+id/btnScan1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="SCAN 1"
+                        android:textSize="13sp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:letterSpacing="0.05"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/scan2Wrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/btn_grey"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btnScan2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="SCAN 2"
+                        android:textSize="13sp"
+                        android:textColor="#666666"
+                        android:textStyle="bold"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:enabled="false"
+                        android:letterSpacing="0.05"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Results Panel — 40% -->
+    <LinearLayout
+        android:id="@+id/infoPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="35"
+        android:orientation="vertical"
+        android:background="#121212"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp">
+
+        <!-- MRP Row -->
+        <LinearLayout
+            android:id="@+id/mrpBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@drawable/card_dark"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:text="MRP"
+                android:textColor="#666666"
+                android:textSize="10sp"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:id="@+id/tvMRP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="—"
+                android:textColor="#BB86FC"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvRawBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RAW ▶"
+                android:textColor="#444466"
+                android:textSize="10sp"
+                android:padding="4dp"/>
+
+        </LinearLayout>
+
+        <!-- MFD Row -->
+        <LinearLayout
+            android:id="@+id/mfgBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@drawable/card_dark"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:text="MFD"
+                android:textColor="#666666"
+                android:textSize="10sp"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:id="@+id/tvMfg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <!-- Expiry Row -->
+        <LinearLayout
+            android:id="@+id/expiryBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@drawable/card_dark"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:text="EXPIRY"
+                android:textColor="#666666"
+                android:textSize="10sp"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:id="@+id/tvExpiry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textColor="#03DAC6"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <!-- Reset -->
+        <TextView
+            android:id="@+id/tvReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="↺  Reset"
+            android:textColor="#444466"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:paddingTop="4dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

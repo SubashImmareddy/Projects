@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Deep purple gradient background circle -->
+    <path
+        android:fillColor="#1A0050"
+        android:pathData="M54,54m-54,0a54,54 0,1 1,108 0a54,54 0,1 1,-108 0"/>
+
+    <!-- Outer gold ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2"
+        android:pathData="M54,54m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0"/>
+
+    <!-- Camera body rounded rect -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M22,38 Q20,38 20,40 L20,72 Q20,74 22,74 L86,74 Q88,74 88,72 L88,40 Q88,38 86,38 Z"/>
+
+    <!-- Camera inner dark body -->
+    <path
+        android:fillColor="#1A0050"
+        android:pathData="M24,40 Q23,40 23,41 L23,71 Q23,72 24,72 L84,72 Q85,72 85,71 L85,41 Q85,40 84,40 Z"/>
+
+    <!-- Camera notch top center -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M44,38 L44,34 Q44,32 46,32 L62,32 Q64,32 64,34 L64,38 Z"/>
+
+    <!-- Lens outer gold ring -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,56m-14,0a14,14 0,1 1,28 0a14,14 0,1 1,-28 0"/>
+
+    <!-- Lens mid purple ring -->
+    <path
+        android:fillColor="#3D0099"
+        android:pathData="M54,56m-11,0a11,11 0,1 1,22 0a11,11 0,1 1,-22 0"/>
+
+    <!-- Lens inner gold -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,56m-7,0a7,7 0,1 1,14 0a7,7 0,1 1,-14 0"/>
+
+    <!-- Lens center dot -->
+    <path
+        android:fillColor="#1A0050"
+        android:pathData="M54,56m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+
+    <!-- Flash dot top right -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M78,46m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+
+    <!-- Sound wave lines right side (voice feature) -->
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M92,48 Q96,56 92,64"/>
+
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M96,44 Q102,56 96,68"/>
+
+    <!-- Text lines below camera (label representation) -->
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M28,82 L52,82"/>
+
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M28,88 L62,88"/>
+
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M28,94 L44,94"/>
+
+    <!-- Small eye overlay on lens -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M48,56 Q54,50 60,56 Q54,62 48,56 Z"/>
+
+</vector>
