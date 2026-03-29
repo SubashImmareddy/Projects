@@ -7,18 +7,18 @@
     android:orientation="vertical"
     android:background="#121212">
 
-    <!-- Camera — takes 60%, settings floats on top of it -->
+    <!-- Camera — 62% of screen -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="65">
+        android:layout_weight="62">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/previewView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <!-- Settings icon floating top right ON camera -->
+        <!-- Settings icon floating top right -->
         <TextView
             android:id="@+id/btnSettings"
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:background="#99000000"
             android:padding="8dp"/>
 
-        <!-- Scan guide box centered -->
+        <!-- Scan guide box -->
         <View
             android:id="@+id/scanBox"
             android:layout_width="260dp"
@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:background="@drawable/scan_guide_box"/>
 
-        <!-- Hint text -->
+        <!-- Hint -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="4dp"/>
 
-        <!-- Bottom control strip overlaid on camera -->
+        <!-- Bottom control strip -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,12 +148,12 @@
 
     </FrameLayout>
 
-    <!-- Results Panel — 40% -->
+    <!-- Results Panel — 38% -->
     <LinearLayout
         android:id="@+id/infoPanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="35"
+        android:layout_weight="38"
         android:orientation="vertical"
         android:background="#121212"
         android:paddingStart="14dp"

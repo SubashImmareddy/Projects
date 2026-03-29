@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:background="#121212">
 
+    <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/settingsTopBar"
         android:layout_width="match_parent"
@@ -49,6 +50,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- THEME Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +61,6 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Only 2 themes now -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,6 +90,46 @@
 
             </LinearLayout>
 
+            <!-- LANGUAGE Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LANGUAGE"
+                android:textColor="#666666"
+                android:textSize="11sp"
+                android:letterSpacing="0.15"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <Button
+                    android:id="@+id/btnLangEnglish"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:text="🇮🇳 English"
+                    android:textSize="13sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#BB86FC"
+                    android:layout_marginEnd="8dp"/>
+
+                <Button
+                    android:id="@+id/btnLangTelugu"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:text="🇮🇳 తెలుగు"
+                    android:textSize="13sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#2C2C2C"/>
+
+            </LinearLayout>
+
+            <!-- ABOUT Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,6 +174,7 @@
 
             </LinearLayout>
 
+            <!-- DEVELOPER Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,6 +211,7 @@
 
             </LinearLayout>
 
+            <!-- HOW TO USE Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

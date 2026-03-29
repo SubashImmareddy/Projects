@@ -35,8 +35,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.util.Locale;
@@ -55,13 +55,12 @@ public class MainActivity extends AppCompatActivity {
     private Camera camera;
     private TextToSpeech tts;
     private ToneGenerator toneGenerator;
-
-    // Reuse recognizer — created once, no lag
     private TextRecognizer textRecognizer;
+    private boolean isTorchOn    = false;
+    private boolean isTeluguMode = false;
 
-    private boolean isTorchOn = false;
-    private String rawText1   = null;
-    private String rawText2   = null;
+    private String rawText1 = null;
+    private String rawText2 = null;
 
     private static final int PERMISSION_REQUEST_CODE = 100;
 
@@ -96,16 +95,32 @@ public class MainActivity extends AppCompatActivity {
         scan2Wrapper   = findViewById(R.id.scan2Wrapper);
         btnTorchWrapper = findViewById(R.id.btnTorchWrapper);
 
-        // Create recognizer ONCE — key fix for lag
-        textRecognizer = TextRecognition.getClient(
-                TextRecognizerOptions.DEFAULT_OPTIONS);
+        // Load saved language
+        isTeluguMode = ThemeManager.getSavedLanguage(this)
+                == ThemeManager.LANG_TELUGU;
 
         applyThemeColors();
 
+        // TTS init with language support
         tts = new TextToSpeech(this, status -> {
-            if (status == TextToSpeech.SUCCESS)
-                tts.setLanguage(Locale.ENGLISH);
+            if (status == TextToSpeech.SUCCESS) {
+                if (isTeluguMode) {
+                    int result = tts.setLanguage(
+                            new Locale("te", "IN"));
+                    if (result == TextToSpeech.LANG_MISSING_DATA ||
+                            result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        tts.setLanguage(Locale.ENGLISH);
+                        isTeluguMode = false;
+                    }
+                } else {
+                    tts.setLanguage(Locale.ENGLISH);
+                }
+            }
         });
+
+        // Create recognizer once — no lag
+        textRecognizer = TextRecognition.getClient(
+                TextRecognizerOptions.DEFAULT_OPTIONS);
 
         toneGenerator = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
 
@@ -115,13 +130,15 @@ public class MainActivity extends AppCompatActivity {
         btnTorch.setOnClickListener(v -> toggleTorch());
 
         btnScan1.setOnClickListener(v -> {
-            tvScanStatus.setText("⏳ Scanning...");
+            tvScanStatus.setText(isTeluguMode
+                    ? "⏳ స్కాన్ అవుతోంది..." : "⏳ Scanning...");
             btnScan1.setEnabled(false);
             captureOCR(1);
         });
 
         btnScan2.setOnClickListener(v -> {
-            tvScanStatus.setText("⏳ Scanning...");
+            tvScanStatus.setText(isTeluguMode
+                    ? "⏳ స్కాన్ అవుతోంది..." : "⏳ Scanning...");
             btnScan2.setEnabled(false);
             captureOCR(2);
         });
@@ -143,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
         String raw = "";
         if (rawText1 != null) raw += "— Scan 1 —\n" + rawText1;
         if (rawText2 != null) raw += "\n\n— Scan 2 —\n" + rawText2;
-        if (raw.isEmpty()) raw = "No scan data yet.";
+        if (raw.isEmpty()) raw = isTeluguMode
+                ? "స్కాన్ డేటా లేదు." : "No scan data yet.";
 
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -180,7 +198,9 @@ public class MainActivity extends AppCompatActivity {
             btnScan1.setTextColor(Color.BLACK);
             btnScan2.setTextColor(Color.parseColor("#888888"));
             btnTorchWrapper.setBackgroundColor(Color.parseColor("#1A1A1A"));
-            tvMRP.setTextSize(20); tvMfg.setTextSize(18); tvExpiry.setTextSize(18);
+            tvMRP.setTextSize(20);
+            tvMfg.setTextSize(18);
+            tvExpiry.setTextSize(18);
         } else {
             rootLayout.setBackgroundColor(Color.parseColor("#121212"));
             infoPanel.setBackgroundColor(Color.parseColor("#121212"));
@@ -198,8 +218,19 @@ public class MainActivity extends AppCompatActivity {
             btnScan1.setTextColor(Color.WHITE);
             btnScan2.setTextColor(Color.parseColor("#666666"));
             btnTorchWrapper.setBackgroundResource(R.drawable.btn_grey);
-            tvMRP.setTextSize(17); tvMfg.setTextSize(15); tvExpiry.setTextSize(15);
+            tvMRP.setTextSize(17);
+            tvMfg.setTextSize(15);
+            tvExpiry.setTextSize(15);
         }
+
+        // Update status text language
+        tvScanStatus.setText(isTeluguMode
+                ? "లేబుల్‌ని బాక్స్‌లో అమర్చండి"
+                : "Point camera at product label");
+        tvReset.setText(isTeluguMode ? "↺  రీసెట్" : "↺  Reset");
+        tvRawBtn.setText(isTeluguMode ? "RAW ▶" : "RAW ▶");
+        btnScan1.setText(isTeluguMode ? "స్కాన్ 1" : "SCAN 1");
+        btnScan2.setText(isTeluguMode ? "స్కాన్ 2" : "SCAN 2");
     }
 
     private void toggleTorch() {
@@ -224,7 +255,8 @@ public class MainActivity extends AppCompatActivity {
 
                 cp.unbindAll();
                 camera = cp.bindToLifecycle(this,
-                        CameraSelector.DEFAULT_BACK_CAMERA, preview, imageCapture);
+                        CameraSelector.DEFAULT_BACK_CAMERA,
+                        preview, imageCapture);
 
                 startContinuousFocus();
 
@@ -268,7 +300,6 @@ public class MainActivity extends AppCompatActivity {
                                 image.getImage(),
                                 image.getImageInfo().getRotationDegrees());
 
-                        // Reuse recognizer — no new object creation
                         textRecognizer.process(input)
                                 .addOnSuccessListener(visionText -> {
                                     String raw = visionText.getText();
@@ -282,19 +313,26 @@ public class MainActivity extends AppCompatActivity {
                                         btnScan1.setEnabled(true);
                                         btnScan2.setEnabled(true);
                                         btnScan2.setTextColor(Color.WHITE);
-                                        scan2Wrapper.setBackgroundResource(R.drawable.btn_purple);
-                                        tvScanStatus.setText("✅ Done. Flip → SCAN 2 for more.");
+                                        scan2Wrapper.setBackgroundResource(
+                                                R.drawable.btn_purple);
+                                        tvScanStatus.setText(isTeluguMode
+                                                ? "✅ స్కాన్ 1 అయింది. తిప్పండి → స్కాన్ 2"
+                                                : "✅ Done. Flip pack → SCAN 2.");
                                     } else {
                                         rawText2 = raw;
                                         btnScan2.setEnabled(true);
-                                        tvScanStatus.setText("✅ Scan 2 done.");
+                                        tvScanStatus.setText(isTeluguMode
+                                                ? "✅ స్కాన్ 2 అయింది."
+                                                : "✅ Scan 2 done.");
                                     }
 
                                     processAndDisplay();
                                     startContinuousFocus();
                                 })
                                 .addOnFailureListener(e -> {
-                                    tvScanStatus.setText("❌ Scan failed. Try again.");
+                                    tvScanStatus.setText(isTeluguMode
+                                            ? "❌ విఫలమైంది. మళ్ళీ ప్రయత్నించండి."
+                                            : "❌ Scan failed. Try again.");
                                     btnScan1.setEnabled(true);
                                     btnScan2.setEnabled(rawText1 != null);
                                     image.close();
@@ -303,7 +341,9 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ImageCaptureException e) {
-                        tvScanStatus.setText("❌ Camera error. Try again.");
+                        tvScanStatus.setText(isTeluguMode
+                                ? "❌ కెమెరా లోపం."
+                                : "❌ Camera error. Try again.");
                         btnScan1.setEnabled(true);
                     }
                 });
@@ -330,7 +370,8 @@ public class MainActivity extends AppCompatActivity {
             tvExpiry.setText("—");
         }
 
-        speak(SpeechHelper.buildSpeech(label.mrp, label.expiryDate, label.mfgDate));
+        speak(SpeechHelper.buildSpeech(
+                label.mrp, label.expiryDate, label.mfgDate, isTeluguMode));
     }
 
     private void resetAll() {
@@ -339,7 +380,9 @@ public class MainActivity extends AppCompatActivity {
         tvMRP.setText("—");
         tvMfg.setText("—");
         tvExpiry.setText("—");
-        tvScanStatus.setText("Point camera at product label");
+        tvScanStatus.setText(isTeluguMode
+                ? "లేబుల్‌ని బాక్స్‌లో అమర్చండి"
+                : "Point camera at product label");
         btnScan1.setEnabled(true);
         btnScan2.setEnabled(false);
         btnScan2.setTextColor(Color.parseColor("#666666"));
@@ -358,6 +401,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        isTeluguMode = ThemeManager.getSavedLanguage(this)
+                == ThemeManager.LANG_TELUGU;
         applyThemeColors();
     }
 

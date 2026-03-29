@@ -60,4 +60,18 @@ public class ThemeManager {
         if (theme == THEME_LIGHT) return android.graphics.Color.parseColor("#000000");
         return android.graphics.Color.WHITE;
     }
+    public static final int LANG_ENGLISH = 0;
+    public static final int LANG_TELUGU  = 1;
+
+    private static final String KEY_LANG = "language";
+
+    public static void saveLanguage(Context context, int lang) {
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+                .edit().putInt(KEY_LANG, lang).apply();
+    }
+
+    public static int getSavedLanguage(Context context) {
+        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+                .getInt(KEY_LANG, LANG_ENGLISH);
+    }
 }
