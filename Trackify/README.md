@@ -1,8 +1,6 @@
 # 📊 Trackify — Monthly Expense Tracker
 
-<p align="center">
-  <img src="assets/icon/icon.png" width="120" alt="Trackify Logo"/>
-</p>
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/Flutter-3.41.2-blue?logo=flutter" />
