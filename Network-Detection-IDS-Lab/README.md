@@ -23,13 +23,13 @@ The goal of this project was to engineer an isolated virtual network to simulate
 ## Visual Evidence
 
 ### 1. Network Architecture (SSH Access)
-![Architecture](./1_Architecture.png)
+![Architecture](./Screenshots/1_Architecture.png)
 
 ### 2. Reconnaissance (Nmap Port Scan)
-![Nmap Scan](./2_Nmap_Scan.png)
+![Nmap Scan](./Screenshots/2_Nmap_Scan.png)
 
 ### 3. Threat Detection (Suricata IDS Alerts)
-![Suricata Alerts](./3_Suricata_Alerts.png)
+![Suricata Alerts](./Screenshots/3_Suricata_Alerts.png)
 
 ### 4. Protocol Analysis (TCP 3-Way Handshake)
-![Packet Analysis](./4_Packet_Analysis.png)
+![Packet Analysis](./Screenshots/4_Packet_Analysis.png)
