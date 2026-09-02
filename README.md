@@ -8,6 +8,10 @@ A collection of projects I’ve built while learning and experimenting with cybe
 *   **[Network Detection and IDS Lab](./Network-Detection-IDS-Lab)** 
     Built an isolated virtual network to simulate, capture, and analyze cyber attacks. Engineered a headless Linux architecture, deployed Suricata for intrusion detection, and performed forensic protocol analysis using `tcpdump`.
 
+*   **[Network Detection and IDS Lab](./Network-Detection-IDS-Lab)**
+* **Focus Areas:** Network Traffic Analysis, Intrusion Detection (IDS), Packet Forensics
+* **Core Stack:** Suricata, `tcpdump`, Wireshark, Linux (Headless Architecture)
+* **Summary:** Built an isolated virtual network environment to simulate, capture, and analyze malicious network traffic. Deployed Suricata for real-time intrusion detection and protocol inspection, validating signature-based alert triggers and performing deep packet inspection via `tcpdump` and forensic protocol analysis.
 
 
 ## Software Development & Mobile Apps
