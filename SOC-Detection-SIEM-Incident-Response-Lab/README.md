@@ -252,4 +252,4 @@ All forensic evidence gathered during this project is cataloged in the [`evidenc
 2. **SIEM Installation:** Deploy Wazuh Central Components (Manager, Indexer, Dashboard) on Ubuntu via the official installation scripts.
 3. **Sensor Provisioning:** Install the Wazuh Windows Agent and Microsoft Sysmon on Windows 11. Configure the agent configuration (`ossec.conf`) to read the `Microsoft-Windows-Sysmon/Operational` channel.
 4. **Attack Simulation:** Execute the simulated attack commands documented in Section 3 from `soc-attacker` and `soc-target`.
-5. **Automation Verification:** Run `python3 threat_parser.py` on the SIEM server to automatically parse the generated alerts.
+5. **Automation Verification:** Run `python3 threat_parser.py` on the SIEM server to automatically parse the generated alerts
